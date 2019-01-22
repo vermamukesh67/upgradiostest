@@ -8,5 +8,9 @@
 
 import Foundation
 
-let imdbApiKey = "b3f499b62957665be727e11b35d53ed8"
+struct AppConstants {
+    static  let imdbApiKey = "b3f499b62957665be727e11b35d53ed8"
+}
+
+
 
