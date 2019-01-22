@@ -12,7 +12,6 @@ class MovieListViewModel
 {
     /// Data source for the home page table view.
     var tableDataSource: [Movie] = [Movie]()
-    private var movieInfo: MovieInfo? = nil
     private var pageNumber : Int = 1
     private var totalPages : Int = 1
     private var selectedMovietype : MovieType   = .Popular
@@ -61,7 +60,6 @@ class MovieListViewModel
     private func getMovieData(completion: @escaping ()->()) {
         
         MovieWebService().getPopularMovieList(movieType: selectedMovietype, pageNum: pageNumber) { (movieObject, error) in
-            self.movieInfo = movieObject
             self.tableDataSource += movieObject?.results ?? self.tableDataSource
             self.pageNumber += 1
             self.totalPages = movieObject?.total_pages ?? 1
