@@ -11,7 +11,7 @@ import Foundation
 class MovieListViewModel
 {
     /// Data source for the home page table view.
-    private var tableDataSource: [Movie] = [Movie]()
+    var tableDataSource: [Movie] = [Movie]()
     private var movieInfo: MovieInfo? = nil
     private var pageNumber : Int = 1
     private var selectedMovietype : MovieType   = .Popular
@@ -53,6 +53,7 @@ class MovieListViewModel
         MovieWebService().getPopularMovieList(movieType: selectedMovietype, pageNum: pageNumber) { (movieObject, error) in
             self.tableDataSource += movieObject?.results ?? self.tableDataSource
             self.pageNumber += 1
+            completion()
         }
         
     }

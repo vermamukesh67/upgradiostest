@@ -12,6 +12,8 @@ import Kingfisher
 class MoviePosterCell: ReusableCollectionViewCell {
     @IBOutlet weak var imgMoviePoster: UIImageView!
     
+    var viewModel : Movie!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,9 +28,27 @@ class MoviePosterCell: ReusableCollectionViewCell {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        viewModel = nil
+    }
+    
+    func prepareCell(viewModel: Movie) {
+        self.viewModel = viewModel
+        setUpUI()
+    }
+    
     private func setUpUI() {
-        imgMoviePoster.kf.indicatorType = IndicatorType.activity
-        imgMoviePoster.kf.setImage(with: URL(string: ""), placeholder: UIImage(named : "whitePlaceholder"), options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
-        })
+         guard let viewModel = self.viewModel else { return }
+        
+        if let imgurl = viewModel.poster_path
+        {
+            let strImgUrl = "https://image.tmdb.org/t/p/w500" + imgurl
+            imgMoviePoster.kf.indicatorType = IndicatorType.activity
+            imgMoviePoster.kf.setImage(with: URL(string: strImgUrl), placeholder: UIImage(named : "whitePlaceholder"), options: nil, progressBlock: nil, completionHandler: { (image, error, cacheType, url) in
+            })
+        }
+        
+       
     }
 }
