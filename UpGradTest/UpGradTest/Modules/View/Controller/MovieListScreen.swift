@@ -11,6 +11,7 @@ import UIKit
 class MovieListScreen: UIViewController {
     
     var equalSpace  = 40
+    var isRefreshInProgress = false
     
     @IBOutlet weak var actMovieList: UIActivityIndicatorView!
     @IBOutlet weak var movieListCollectionView: UICollectionView!

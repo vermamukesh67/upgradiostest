@@ -12,7 +12,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 */
 
 import Foundation
-struct Results : Codable {
+struct Movie : Codable {
 	let vote_count : Int?
 	let id : Int?
 	let video : Bool?

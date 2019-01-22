@@ -16,7 +16,7 @@ struct MovieInfo : Codable {
 	let page : Int?
 	let total_results : Int?
 	let total_pages : Int?
-	let results : [Results]?
+	let results : [Movie]?
 
 	enum CodingKeys: String, CodingKey {
 
@@ -31,7 +31,7 @@ struct MovieInfo : Codable {
 		page = try values.decodeIfPresent(Int.self, forKey: .page)
 		total_results = try values.decodeIfPresent(Int.self, forKey: .total_results)
 		total_pages = try values.decodeIfPresent(Int.self, forKey: .total_pages)
-		results = try values.decodeIfPresent([Results].self, forKey: .results)
+		results = try values.decodeIfPresent([Movie].self, forKey: .results)
 	}
 
 }
