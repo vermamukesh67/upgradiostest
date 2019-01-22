@@ -18,6 +18,8 @@ class MovieListScreen: UIViewController {
     
     private var viewModel = MovieListViewModel()
     
+    // MARK: View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareTableView()
@@ -42,24 +44,27 @@ class MovieListScreen: UIViewController {
             DispatchQueue.main.async {
                 self?.movieListCollectionView.reloadData()
                 self?.isRefreshInProgress = false
-                
+                self?.actMovieList.stopAnimating()
             }
         }
-        
-        viewModel.movieSelected = { [weak self] movie in
-            DispatchQueue.main.async {
-                self?.navigateToMovieDetailsWithMovieData(movie)
-            }
-        }
-        
     }
+    
+    // MARK: Load Movies
     
     private func loadMovieData()
     {
-        viewModel.refreshScreen()
+        if isRefreshInProgress
+        {
+            return
+        }
+        isRefreshInProgress = true
+        actMovieList.startAnimating()
+        viewModel.loadMoreData()
     }
 
 }
+
+// MARK: CollectionView Delegate and DataSource
 
 extension MovieListScreen : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout
 {
@@ -71,12 +76,13 @@ extension MovieListScreen : UICollectionViewDelegate, UICollectionViewDataSource
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviePosterCell", for: indexPath) as! MoviePosterCell
         cell.prepareCell(viewModel: viewModel.tableDataSource[indexPath.row])
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        // 16 : 9 ratio
+        // 9 : 16 ratio
         let width = Int (self.view.frame.size.width / 2 ) as Int - ( self.equalSpace * 2)
         let height = (width * 16) / 9
         return CGSize(width: width, height: height - (( self.equalSpace)))
@@ -99,6 +105,19 @@ extension MovieListScreen : UICollectionViewDelegate, UICollectionViewDataSource
         return CGFloat(self.equalSpace)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigateToMovieDetailsWithMovieData(viewModel.tableDataSource[indexPath.row])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == viewModel.tableDataSource.count - 1
+        {
+            // this is the last cell, load more data
+            
+            loadMovieData()
+        }
+    }
 }
 
 // MARK: Routing
@@ -107,7 +126,7 @@ extension MovieListScreen
 {
     private func navigateToMovieDetailsWithMovieData(_ movieDetails: Movie) {
         let controller = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsScreen") as! MovieDetailsScreen
-//        controller.prepareView(viewModel: placeViewVM)
+        controller.objMovieInfo = movieDetails
         navigationController?.pushViewController(controller, animated: true)
     }
 }

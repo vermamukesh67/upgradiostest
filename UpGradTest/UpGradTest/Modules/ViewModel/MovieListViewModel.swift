@@ -14,14 +14,12 @@ class MovieListViewModel
     var tableDataSource: [Movie] = [Movie]()
     private var movieInfo: MovieInfo? = nil
     private var pageNumber : Int = 1
+    private var totalPages : Int = 1
     private var selectedMovietype : MovieType   = .Popular
     // MARK: Input
     var viewDidLoad: ()->() = {}
     
     // MARK: Events
-    
-    /// Callback to pass the selected place.
-    var movieSelected: (Movie)->() = { _ in }
     
     var reloadTable: ()->() = { }
     
@@ -48,11 +46,25 @@ class MovieListViewModel
         })
     }
     
+    /// Method call to inform the view model to refresh the data.
+    func loadMoreData() {
+        
+        if totalPages >= self.pageNumber
+        {
+            self.getMovieData(completion: { [weak self] in
+                self?.prepareTableDataSource()
+                self?.reloadTable()
+            })
+        }
+    }
+    
     private func getMovieData(completion: @escaping ()->()) {
         
         MovieWebService().getPopularMovieList(movieType: selectedMovietype, pageNum: pageNumber) { (movieObject, error) in
+            self.movieInfo = movieObject
             self.tableDataSource += movieObject?.results ?? self.tableDataSource
             self.pageNumber += 1
+            self.totalPages = movieObject?.total_pages ?? 1
             completion()
         }
         
