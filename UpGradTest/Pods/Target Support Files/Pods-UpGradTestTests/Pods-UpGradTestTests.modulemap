@@ -1,0 +1,6 @@
+framework module Pods_UpGradTestTests {
+  umbrella header "Pods-UpGradTestTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
