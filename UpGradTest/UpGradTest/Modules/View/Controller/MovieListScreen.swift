@@ -12,7 +12,7 @@ class MovieListScreen: UIViewController {
     
     var equalSpace  = 40
     var isRefreshInProgress = false
-    
+    var currentFilter : FilterType = .PopularType
     @IBOutlet weak var actMovieList: UIActivityIndicatorView!
     @IBOutlet weak var movieListCollectionView: UICollectionView!
     
@@ -22,6 +22,8 @@ class MovieListScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Adding right bar button to refresh the content
+
         self.prepareTableView()
         self.observeEvents()
         self.loadMovieData()
@@ -35,7 +37,7 @@ class MovieListScreen: UIViewController {
         default:
             equalSpace = 40
         }
-        MoviePosterCell.registerWithCollectionView(self.movieListCollectionView)
+    MoviePosterCell.registerWithCollectionView(self.movieListCollectionView)
     }
     
     /// Function to observe various event call backs from the viewmodel as well as Notifications.
@@ -61,7 +63,11 @@ class MovieListScreen: UIViewController {
         actMovieList.startAnimating()
         viewModel.loadMoreData()
     }
-
+    @IBAction func btnFilterTapped(_ sender: Any) {
+        
+        presentFilterScreen(currentFilter)
+    }
+    
 }
 
 // MARK: CollectionView Delegate and DataSource
@@ -128,5 +134,24 @@ extension MovieListScreen
         let controller = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsScreen") as! MovieDetailsScreen
         controller.objMovieInfo = movieDetails
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    private func presentFilterScreen(_ filterSelected: FilterType) {
+        let controller = storyboard?.instantiateViewController(withIdentifier: "filterNavVC") as! UINavigationController
+        let filterScr : FilterScreen = controller.viewControllers[0] as! FilterScreen
+        filterScr.filterType = filterSelected
+        filterScr.delegate = self
+        self.present(controller, animated: true) {
+            
+        }
+    }
+
+}
+
+extension MovieListScreen : FilterScreenDelegate
+{
+    func selectFilter(filter: FilterType) {
+        currentFilter = filter
+        self.viewModel.SortMovies(filterType: filter)
     }
 }
