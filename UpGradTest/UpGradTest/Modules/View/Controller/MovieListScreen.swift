@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MovieListScreen: UIViewController {
     
     var equalSpace  = 40
@@ -15,6 +16,8 @@ class MovieListScreen: UIViewController {
     var currentFilter : FilterType = .PopularType
     @IBOutlet weak var actMovieList: UIActivityIndicatorView!
     @IBOutlet weak var movieListCollectionView: UICollectionView!
+    
+    @IBOutlet weak var btnReload: UIButton!
     
     private var viewModel = MovieListViewModel()
     
@@ -55,17 +58,42 @@ class MovieListScreen: UIViewController {
     
     private func loadMovieData()
     {
+
         if isRefreshInProgress
         {
             return
         }
-        isRefreshInProgress = true
-        actMovieList.startAnimating()
-        viewModel.loadMoreData()
+        
+        if NetworkManager.isInterNetExist() {
+            isRefreshInProgress = true
+            btnReload.isHidden = true
+            actMovieList.startAnimating()
+            viewModel.loadMoreData()
+        }
+        else
+        {
+            if viewModel.numberOfRows == 0
+            {
+                btnReload.isHidden = false
+            }
+            else
+            {
+                btnReload.isHidden = true
+            }
+            let alert = UIAlertController(title: "No Internet connection", message: "Turn on mobile data or use Wi-Fi to access data.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
     }
     @IBAction func btnFilterTapped(_ sender: Any) {
         
         presentFilterScreen(currentFilter)
+    }
+    @IBAction func btnReloadTapped(_ sender: Any) {
+        btnReload.isHidden = true
+        loadMovieData()
     }
     
 }

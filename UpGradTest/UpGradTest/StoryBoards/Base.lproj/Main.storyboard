@@ -33,9 +33,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Lwx-lP-WAF"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="BVV-o3-atV">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BVV-o3-atV">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQl-9D-l33">
+                                <rect key="frame" x="164" y="318" width="47" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reload"/>
+                                <connections>
+                                    <action selector="btnReloadTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ETO-zM-jvP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -57,6 +65,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="actMovieList" destination="BVV-o3-atV" id="6v9-L6-kq2"/>
+                        <outlet property="btnReload" destination="cQl-9D-l33" id="9mV-kG-bav"/>
                         <outlet property="movieListCollectionView" destination="VOv-6z-Sqs" id="WbU-fE-zs3"/>
                     </connections>
                 </viewController>
@@ -312,7 +321,6 @@
         <!--Navigation Controller-->
         <scene sceneID="gfH-cp-c2O">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iLT-X3-Zkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="filterNavVC" automaticallyAdjustsScrollViewInsets="NO" id="Cx9-AK-srh" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bNy-Jc-Xxx">
@@ -324,6 +332,7 @@
                         <segue destination="YSW-fy-7rQ" kind="relationship" relationship="rootViewController" id="xas-wI-LBj"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iLT-X3-Zkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2405.5999999999999" y="132.68365817091455"/>
         </scene>

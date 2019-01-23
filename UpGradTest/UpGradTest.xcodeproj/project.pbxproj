@@ -26,6 +26,7 @@
 		8B5F21A821F5D44000793B25 /* UICollectionView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F21A621F5D44000793B25 /* UICollectionView+Additions.swift */; };
 		8B5F21A921F5D44000793B25 /* UITableView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5F21A721F5D44000793B25 /* UITableView+Additions.swift */; };
 		8B8C3F2221F8389F00B9B555 /* FilterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C3F2121F8389F00B9B555 /* FilterScreen.swift */; };
+		8B8C3F2421F872C600B9B555 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8C3F2321F872C600B9B555 /* NetworkManager.swift */; };
 		C0FD98BA21F62B9D00AB76F0 /* MovieListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD98B921F62B9D00AB76F0 /* MovieListScreen.swift */; };
 		C0FD98BD21F62D3300AB76F0 /* MoviePosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD98BB21F62D3300AB76F0 /* MoviePosterCell.swift */; };
 		C0FD98BE21F62D3300AB76F0 /* MoviePosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0FD98BC21F62D3300AB76F0 /* MoviePosterCell.xib */; };
@@ -80,6 +81,7 @@
 		8B5F21A621F5D44000793B25 /* UICollectionView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Additions.swift"; sourceTree = "<group>"; };
 		8B5F21A721F5D44000793B25 /* UITableView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Additions.swift"; sourceTree = "<group>"; };
 		8B8C3F2121F8389F00B9B555 /* FilterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScreen.swift; sourceTree = "<group>"; };
+		8B8C3F2321F872C600B9B555 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0FD98B921F62B9D00AB76F0 /* MovieListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListScreen.swift; sourceTree = "<group>"; };
 		C0FD98BB21F62D3300AB76F0 /* MoviePosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterCell.swift; sourceTree = "<group>"; };
 		C0FD98BC21F62D3300AB76F0 /* MoviePosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviePosterCell.xib; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			children = (
 				8B502E2521F6F37D00CCB413 /* WebApiManager.swift */,
 				8B502E2721F6F3AF00CCB413 /* MovieWebService.swift */,
+				8B8C3F2321F872C600B9B555 /* NetworkManager.swift */,
 			);
 			path = ApiManager;
 			sourceTree = "<group>";
@@ -489,12 +492,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-UpGradTest/Pods-UpGradTest-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -534,6 +539,7 @@
 				8B5F215421F5A30500793B25 /* AppDelegate.swift in Sources */,
 				C0FD98C021F62FB700AB76F0 /* MovieDetailsScreen.swift in Sources */,
 				8B5F21A821F5D44000793B25 /* UICollectionView+Additions.swift in Sources */,
+				8B8C3F2421F872C600B9B555 /* NetworkManager.swift in Sources */,
 				C0FD98BA21F62B9D00AB76F0 /* MovieListScreen.swift in Sources */,
 				C0FD98BD21F62D3300AB76F0 /* MoviePosterCell.swift in Sources */,
 				8B5F215C21F5A30500793B25 /* UpGradTest.xcdatamodeld in Sources */,
