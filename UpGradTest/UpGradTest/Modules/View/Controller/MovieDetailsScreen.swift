@@ -56,6 +56,7 @@ class MovieDetailsScreen: UITableViewController {
     }
 }
 
+// MARK: UITableView Delegate and DataSource
 extension MovieDetailsScreen
 {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

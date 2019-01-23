@@ -12,8 +12,8 @@ class MovieListViewModel
 {
     /// Data source for the home page table view.
     var tableDataSource: [Movie] = [Movie]()
-    private var pageNumber : Int = 1
-    private var totalPages : Int = 1
+    var pageNumber : Int = 1
+    var totalPages : Int = 1
     private var selectedMovietype : MovieType   = .Popular
     private var selectedFilterType : FilterType   = .PopularType
     // MARK: Input

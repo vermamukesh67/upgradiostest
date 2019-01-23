@@ -26,7 +26,7 @@ struct MovieWebService {
             finalUrl = "https://api.themoviedb.org/3/discover/movie?page=\(pageNum)&include_video=false&include_adult=false&sort_by=vote_average.desc&language=en-US&api_key=\(AppConstants.imdbApiKey)"
         }
         
-        WebApiManager.sharedService.requestAPI(url: finalUrl, parameter: nil, httpMethodType: .GET) { (response, error) in
+        WebApiManager.sharedService.requestAPI(url: finalUrl, parameter: nil, httpMethodType: .GET) { (response, urlResponse, error) in
             
             guard let data = response else {
                 completion(nil, error)
@@ -50,7 +50,7 @@ struct MovieWebService {
         
         let finalUrl : String = "https://api.themoviedb.org/3/discover/movie?page=\(pageNum)&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=\(AppConstants.imdbApiKey)"
 
-        WebApiManager.sharedService.requestAPI(url: finalUrl, parameter: nil, httpMethodType: .GET) { (response, error) in
+        WebApiManager.sharedService.requestAPI(url: finalUrl, parameter: nil, httpMethodType: .GET) { (response, urlResponse, error) in
             
             guard let data = response else {
                 completion(nil, error)

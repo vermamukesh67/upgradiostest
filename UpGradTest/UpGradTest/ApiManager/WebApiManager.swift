@@ -14,7 +14,7 @@ class WebApiManager: NSObject {
     
     static let sharedService = WebApiManager()
     
-    typealias WebServiceCompletionBlock = (_ data: Data?,_ error: Error?)->Void
+    typealias WebServiceCompletionBlock = (_ data: Data?, _ response: URLResponse?,_ error: Error?)->Void
     
     enum HTTPMethodType: Int {
         case POST = 0
@@ -50,7 +50,7 @@ class WebApiManager: NSObject {
                     print("Error in fetching response")
                 }
                 
-                completion(data,nil)
+                completion(data,response,nil)
             }
             task.resume()
             

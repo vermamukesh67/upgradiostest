@@ -25,18 +25,19 @@ class FilterScreen: UIViewController {
     var filterType : FilterType = .PopularType
     weak var delegate : FilterScreenDelegate?
 
+    // MARK: View LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    // MARK: UIBarButton Events
+    
     @IBAction func btnCancelTapped(_ sender: Any) {
-        
-        
         self.dismiss(animated: true) {
-            
         }
-
     }
+    
     @IBAction func btnDoneTapped(_ sender: Any) {
         delegate?.selectFilter(filter: filterType)
         self.dismiss(animated: true) {
@@ -44,6 +45,8 @@ class FilterScreen: UIViewController {
         }
     }
 }
+
+// MARK: UITableView Delegate and DataSource
 
 extension FilterScreen : UITableViewDelegate, UITableViewDataSource
 {
